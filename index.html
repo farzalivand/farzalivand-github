@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>رزومه حسین فرضعلی‌وند | Hossein Farzalivand Resume</title>
-  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600&display=swap" rel="stylesheet" />
   <style>
     body {
       font-family: 'Vazirmatn', sans-serif;
@@ -12,6 +12,7 @@
       color: #e0e0e0;
       margin: 0;
       padding: 0;
+      direction: rtl; /* راست‌چین بودن کل صفحه */
     }
     .container {
       max-width: 1000px;
@@ -68,12 +69,23 @@
       text-align: center;
       margin-top: 1rem;
     }
+    /* مهم: الایگمنت دو طرفه برای متن پاراگراف‌های داخل بخش‌ها */
+    .section p {
+      text-align: justify;
+      text-justify: inter-word; /* بهبود حالت justify */
+      line-height: 1.6;
+    }
   </style>
 </head>
 <body>
   <div class="container">
     <p align="center">
-  <img src="https://github.com/farzalivand/farzalivand/raw/main/profile_circular_shadow.png" width="160" height="160" alt="Hossein Farzalivand" />
+      <img
+        src="https://github.com/farzalivand/farzalivand/raw/main/profile_circular_shadow.png"
+        width="160"
+        height="160"
+        alt="Hossein Farzalivand"
+      />
     </p>
 
     <div class="lang-switcher">
@@ -87,10 +99,21 @@
 
       <div class="section">
         <h3>🚀 درباره من</h3>
-        <p style="text-align: justify;">
-          توسعه‌دهنده پرتلاش با سابقه فعالیت در سامانه‌های بانکی مهم مانند <strong>اعتبارسنجی سدرا</strong>، <strong>ذینفع واحد</strong>، <strong>پولشویی</strong>، <strong>مدیریت پذیرندگان</strong> و سامانه‌های قدیمی <strong>شرکت سمات</strong> با تکنولوژی AngularJS هستم.
-          <br>از سال ۱۴۰۰ تاکنون در <strong>شرکت سامانه متمرکز الکترونیک توسعه تعاون (سمات)</strong> وابسته به <strong>بانک توسعه تعاون</strong> فعالیت می‌کنم.
-          <br>پیش از آن، از ۱۳۹۷ تا ۱۴۰۰ در شرکت <strong>اسوه ایران (هلدینگ GSS)</strong>، از ۱۳۹۶ تا ۱۳۹۷ در <strong>اندیشه کامپیوتر</strong> روی پروژه مقامات نهاد ریاست‌جمهوری و از ۱۳۹۳ تا ۱۳۹۵ در <strong>شرکت حفیظ (امیدتک)</strong> برای <strong>بانک انصار</strong> مشغول بوده‌ام.
+        <p>
+          توسعه‌دهنده پرتلاش با سابقه فعالیت در سامانه‌های بانکی مهم مانند
+          <strong>اعتبارسنجی سدرا</strong>، <strong>ذینفع واحد</strong>، <strong>پولشویی</strong>،
+          <strong>مدیریت پذیرندگان</strong> و سامانه‌های قدیمی
+          <strong>شرکت سمات</strong> با تکنولوژی AngularJS هستم.
+          <br />
+          از سال ۱۴۰۰ تاکنون در
+          <strong>شرکت سامانه متمرکز الکترونیک توسعه تعاون (سمات)</strong>
+          وابسته به <strong>بانک توسعه تعاون</strong> فعالیت می‌کنم.
+          <br />
+          پیش از آن، از ۱۳۹۷ تا ۱۴۰۰ در شرکت
+          <strong>اسوه ایران (هلدینگ GSS)</strong>، از ۱۳۹۶ تا ۱۳۹۷ در
+          <strong>اندیشه کامپیوتر</strong> روی پروژه مقامات نهاد ریاست‌جمهوری و
+          از ۱۳۹۳ تا ۱۳۹۵ در
+          <strong>شرکت حفیظ (امیدتک)</strong> برای <strong>بانک انصار</strong> مشغول بوده‌ام.
         </p>
       </div>
 
@@ -107,9 +130,15 @@
       <div class="section">
         <h3>📚 پروژه‌های منتخب</h3>
         <ul>
-          <li><a href="https://github.com/farzalivand/bonevar-app">Bonevar-App (بنه‌وار)</a>: وب‌اپلیکیشن معرفی مکان‌های بوم‌گردی ایران</li>
-          <li><a href="https://github.com/farzalivand/banking-ai">Banking AI</a>: مدل یادگیری ماشین برای اعتبارسنجی بانکی</li>
-          <li><a href="https://github.com/farzalivand/react-image-cropper">Crop & Compress Tool</a>: ابزار کراپ عکس و فشرده‌سازی</li>
+          <li><a href="https://github.com/farzalivand/bonevar-app">Bonevar-App (بنه‌وار)</a>:
+            وب‌اپلیکیشن معرفی مکان‌های بوم‌گردی ایران
+          </li>
+          <li><a href="https://github.com/farzalivand/banking-ai">Banking AI</a>:
+            مدل یادگیری ماشین برای اعتبارسنجی بانکی
+          </li>
+          <li><a href="https://github.com/farzalivand/react-image-cropper">Crop & Compress Tool</a>:
+            ابزار کراپ عکس و فشرده‌سازی
+          </li>
         </ul>
       </div>
     </div>
@@ -120,9 +149,16 @@
 
       <div class="section">
         <h3>🚀 About Me</h3>
-        <p style="text-align: justify;">
-          A dedicated developer working on critical banking systems such as <strong>Sadra Credit Scoring</strong>, <strong>Anti-Money Laundering</strong>, <strong>Unified Beneficiary</strong>, and <strong>Merchant Management</strong> in <strong>Samaneh MotaMarkaz Elektronik Tose'e Ta'avon (SEMAT)</strong> of <strong>Bank Tose'e Ta'avon</strong> since 2021.
-          <br>Previously at <strong>Osveh Iran (GSS Holding)</strong> (2018–2021), <strong>Andisheh Computer</strong> on presidential IT systems (2017–2018), and <strong>Hafiz (now OmidTech)</strong> for Bank Ansar (2014–2016).
+        <p>
+          A dedicated developer working on critical banking systems such as
+          <strong>Sadra Credit Scoring</strong>, <strong>Anti-Money Laundering</strong>,
+          <strong>Unified Beneficiary</strong>, and <strong>Merchant Management</strong> in
+          <strong>Samaneh MotaMarkaz Elektronik Tose'e Ta'avon (SEMAT)</strong> of
+          <strong>Bank Tose'e Ta'avon</strong> since 2021.
+          <br />
+          Previously at <strong>Osveh Iran (GSS Holding)</strong> (2018–2021),
+          <strong>Andisheh Computer</strong> on presidential IT systems (2017–2018), and
+          <strong>Hafiz (now OmidTech)</strong> for Bank Ansar (2014–2016).
         </p>
       </div>
 
@@ -139,12 +175,17 @@
       <div class="section">
         <h3>📚 Selected Projects</h3>
         <ul>
-          <li><a href="https://github.com/farzalivand/bonevar-app">Bonevar-App</a>: Ecotourism places showcase platform</li>
-          <li><a href="https://github.com/farzalivand/banking-ai">Banking AI</a>: ML-based banking credit scoring model</li>
-          <li><a href="https://github.com/farzalivand/react-image-cropper">Image Crop Tool</a>: React-based crop & compression tool</li>
+          <li><a href="https://github.com/farzalivand/bonevar-app">Bonevar-App</a>:
+            Ecotourism places showcase platform
+          </li>
+          <li><a href="https://github.com/farzalivand/banking-ai">Banking AI</a>:
+            ML-based banking credit scoring model
+          </li>
+          <li><a href="https://github.com/farzalivand/react-image-cropper">Image Crop Tool</a>:
+            React-based crop & compression tool
+          </li>
         </ul>
       </div>
-
     </div>
   </div>
 
