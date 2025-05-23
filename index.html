@@ -12,7 +12,9 @@
       color: #e0e0e0;
       margin: 0;
       padding: 0;
-      direction: rtl; /* راست‌چین بودن کل صفحه */
+      position: relative;
+      min-height: 100vh;
+      overflow-x: hidden;
     }
     .container {
       max-width: 1000px;
@@ -21,6 +23,8 @@
       padding: 2rem;
       border-radius: 16px;
       box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+      position: relative;
+      z-index: 10;
     }
     h1, h2, h3 {
       text-align: center;
@@ -55,6 +59,7 @@
       color: #fff;
       cursor: pointer;
       border-radius: 8px;
+      transition: background-color 0.3s ease;
     }
     .lang-switcher button.active {
       background-color: #4db8ff;
@@ -65,20 +70,109 @@
     .hide {
       display: none;
     }
-    .pdf-download {
-      text-align: center;
-      margin-top: 1rem;
+
+    /* عکس در چهار گوشه */
+    .corner-img {
+      position: fixed;
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      box-shadow: 0 0 10px #4db8ff88;
+      z-index: 1000;
+      object-fit: cover;
+      user-select: none;
+      pointer-events: none;
+      background-color: #222;
     }
-    /* مهم: الایگمنت دو طرفه برای متن پاراگراف‌های داخل بخش‌ها */
-    .section p {
-      text-align: justify;
-      text-justify: inter-word; /* بهبود حالت justify */
-      line-height: 1.6;
+    .top-right {
+      top: 20px;
+      right: 20px;
+    }
+    .top-left {
+      top: 20px;
+      left: 20px;
+    }
+    .bottom-right {
+      bottom: 20px;
+      right: 20px;
+    }
+    .bottom-left {
+      bottom: 20px;
+      left: 20px;
+    }
+
+    /* متن متحرک */
+    .marquee-container {
+      position: fixed;
+      width: calc(100% - 260px); /* فاصله بین عکس ها 100px * 2 + 20px * 4 */
+      overflow: hidden;
+      z-index: 5; /* زیر محتوا */
+      direction: rtl;
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #4db8ffcc; /* کمی شفاف */
+      white-space: nowrap;
+      text-align: right;
+      background: rgba(30, 30, 30, 0.3);
+      border-radius: 10px;
+      padding: 0.15rem 1rem;
+      font-family: 'Vazirmatn', sans-serif;
+      pointer-events: none; /* اجازه کلیک به متن متحرک ندهد */
+      user-select: none; /* جلوگیری از انتخاب متن */
+    }
+    .marquee-top {
+      top: 0px;
+      right: 130px;
+      left: 130px;
+    }
+    .marquee-bottom {
+      bottom: 0px;
+      right: 130px;
+      left: 130px;
+    }
+    .marquee-text {
+      display: inline-block;
+      padding-left: 100%;
+      animation: marquee-rtl 60s linear infinite;
+    }
+    @keyframes marquee-rtl {
+      0% {
+        transform: translateX(0%);
+      }
+      100% {
+        transform: translateX(-100%);
+      }
     }
   </style>
 </head>
 <body>
-  <div class="container">
+  
+  <!-- عکس ها در چهار گوشه -->
+  <img src="https://github.com/farzalivand/farzalivand/raw/main/profile_circular_shadow.png" alt="Hossein Farzalivand" class="corner-img top-right" />
+  <img src="https://github.com/farzalivand/farzalivand/raw/main/profile_circular_shadow.png" alt="Hossein Farzalivand" class="corner-img top-left" />
+  <img src="https://github.com/farzalivand/farzalivand/raw/main/profile_circular_shadow.png" alt="Hossein Farzalivand" class="corner-img bottom-right" />
+  <img src="https://github.com/farzalivand/farzalivand/raw/main/profile_circular_shadow.png" alt="Hossein Farzalivand" class="corner-img bottom-left" />
+
+  <!-- متن متحرک بالا -->
+  <div class="marquee-container marquee-top" aria-label="حضرت مولانا">
+    <div class="marquee-text">
+ مرغ باغ ملکوتم نیم از عالم خاک *** چند روزی قفسی ساخته اند از بدنم - حضرت مولانا
+ </div>
+  </div>
+
+  <!-- متن متحرک پایین -->
+  <div class="marquee-container marquee-bottom" aria-label="حضرت مولانا">
+    <div class="marquee-text">
+ عالم این خاک و هوا گوهر کفر است و فنا *** از دل کفر آمده ام تا که به ایمان برسم - حضرت مولانا
+ </div>
+  </div>
+
+  <!-- محتوا -->
+  <div class="container" role="main">
+    <div class="lang-switcher" role="navigation" aria-label="سوئیچ زبان">
+      <button id="btn-fa" class="active" aria-pressed="true">فارسی</button>
+      <button id="btn-en" aria-pressed="false">English</button>
+    </div>
     <p align="center">
       <img
         src="https://github.com/farzalivand/farzalivand/raw/main/profile_circular_shadow.png"
@@ -88,32 +182,16 @@
       />
     </p>
 
-    <div class="lang-switcher">
-      <button id="btn-fa" class="active">فارسی</button>
-      <button id="btn-en">English</button>
-    </div>
-
     <div id="resume-fa">
       <h1>👋 سلام! من حسین فرضعلی‌وند هستم</h1>
       <h2>👨‍💻 توسعه‌دهنده فرانت‌اند | پژوهشگر هوش مصنوعی | عاشق طبیعت 🌿</h2>
 
       <div class="section">
         <h3>🚀 درباره من</h3>
-        <p>
-          توسعه‌دهنده پرتلاش با سابقه فعالیت در سامانه‌های بانکی مهم مانند
-          <strong>اعتبارسنجی سدرا</strong>، <strong>ذینفع واحد</strong>، <strong>پولشویی</strong>،
-          <strong>مدیریت پذیرندگان</strong> و سامانه‌های قدیمی
-          <strong>شرکت سمات</strong> با تکنولوژی AngularJS هستم.
-          <br />
-          از سال ۱۴۰۰ تاکنون در
-          <strong>شرکت سامانه متمرکز الکترونیک توسعه تعاون (سمات)</strong>
-          وابسته به <strong>بانک توسعه تعاون</strong> فعالیت می‌کنم.
-          <br />
-          پیش از آن، از ۱۳۹۷ تا ۱۴۰۰ در شرکت
-          <strong>اسوه ایران (هلدینگ GSS)</strong>، از ۱۳۹۶ تا ۱۳۹۷ در
-          <strong>اندیشه کامپیوتر</strong> روی پروژه مقامات نهاد ریاست‌جمهوری و
-          از ۱۳۹۳ تا ۱۳۹۵ در
-          <strong>شرکت حفیظ (امیدتک)</strong> برای <strong>بانک انصار</strong> مشغول بوده‌ام.
+        <p style="text-align: justify;">
+          توسعه‌دهنده پرتلاش با سابقه فعالیت در سامانه‌های بانکی مهم مانند <strong>اعتبارسنجی سدرا</strong>، <strong>ذینفع واحد</strong>، <strong>پولشویی</strong>، <strong>مدیریت پذیرندگان</strong> و سامانه‌های قدیمی <strong>شرکت سمات</strong> با تکنولوژی AngularJS هستم.
+          <br />از سال ۱۴۰۰ تاکنون در <strong>شرکت سامانه متمرکز الکترونیک توسعه تعاون (سمات)</strong> وابسته به <strong>بانک توسعه تعاون</strong> فعالیت می‌کنم.
+          <br />پیش از آن، از ۱۳۹۷ تا ۱۴۰۰ در شرکت <strong>اسوه ایران (هلدینگ GSS)</strong>، از ۱۳۹۶ تا ۱۳۹۷ در <strong>اندیشه کامپیوتر</strong> روی پروژه مقامات نهاد ریاست‌جمهوری و از ۱۳۹۳ تا ۱۳۹۵ در <strong>شرکت حفیظ (امیدتک)</strong> برای <strong>بانک انصار</strong> مشغول بوده‌ام.
         </p>
       </div>
 
@@ -130,35 +208,23 @@
       <div class="section">
         <h3>📚 پروژه‌های منتخب</h3>
         <ul>
-          <li><a href="https://github.com/farzalivand/bonevar-app">Bonevar-App (بنه‌وار)</a>:
-            وب‌اپلیکیشن معرفی مکان‌های بوم‌گردی ایران
-          </li>
-          <li><a href="https://github.com/farzalivand/banking-ai">Banking AI</a>:
-            مدل یادگیری ماشین برای اعتبارسنجی بانکی
-          </li>
-          <li><a href="https://github.com/farzalivand/react-image-cropper">Crop & Compress Tool</a>:
-            ابزار کراپ عکس و فشرده‌سازی
-          </li>
+          <li><a href="https://github.com/farzalivand/bonevar-app">Bonevar-App (بنه‌وار)</a>: وب‌اپلیکیشن معرفی مکان‌های بوم‌گردی ایران</li>
+          <li><a href="https://github.com/farzalivand/banking-ai">Banking AI</a>: مدل یادگیری ماشین برای اعتبارسنجی بانکی</li>
+          <li><a href="https://github.com/farzalivand/react-image-cropper">Crop & Compress Tool</a>: ابزار کراپ عکس و فشرده‌سازی با React</li>
         </ul>
       </div>
     </div>
 
-    <div id="resume-en" class="hide">
-      <h1>👋 Hi! I'm Hossein Farzalivand</h1>
-      <h2>👨‍💻 Front-End Developer | AI Researcher | Nature Lover 🌿</h2>
+    <div id="resume-en" class="hide" lang="en">
+      <h1>👋 Hello! I'm Hossein Farzalivand</h1>
+      <h2>👨‍💻 Front-end Developer | AI Researcher | Nature Lover 🌿</h2>
 
       <div class="section">
         <h3>🚀 About Me</h3>
         <p>
-          A dedicated developer working on critical banking systems such as
-          <strong>Sadra Credit Scoring</strong>, <strong>Anti-Money Laundering</strong>,
-          <strong>Unified Beneficiary</strong>, and <strong>Merchant Management</strong> in
-          <strong>Samaneh MotaMarkaz Elektronik Tose'e Ta'avon (SEMAT)</strong> of
-          <strong>Bank Tose'e Ta'avon</strong> since 2021.
-          <br />
-          Previously at <strong>Osveh Iran (GSS Holding)</strong> (2018–2021),
-          <strong>Andisheh Computer</strong> on presidential IT systems (2017–2018), and
-          <strong>Hafiz (now OmidTech)</strong> for Bank Ansar (2014–2016).
+          Energetic developer experienced in banking systems such as Sedra Credit Scoring, Unit Beneficiary, Anti-Money Laundering, Merchant Management, and legacy systems of Semat company using AngularJS.
+          <br />Since 2021, I work at Semat (Centralized Electronic System of Cooperative Development) affiliated with the Cooperative Development Bank.
+          <br />Before that, from 2018 to 2021, I worked at Osveh Iran (GSS Holding), 2017–2018 at Andisheh Computer on presidential projects, and 2014–2016 at Hafiz Company (OmidTech) for Ansar Bank.
         </p>
       </div>
 
@@ -167,7 +233,7 @@
         <ul>
           <li><strong>Languages:</strong> JavaScript, TypeScript, Python</li>
           <li><strong>Frameworks:</strong> React.js, Redux, Ant Design, Tailwind CSS</li>
-          <li><strong>AI:</strong> Scikit-Learn, TensorFlow (Basic), RL</li>
+          <li><strong>AI:</strong> Scikit-Learn, TensorFlow (basic), RL</li>
           <li><strong>Tools:</strong> Git, GitHub, Figma, REST APIs</li>
         </ul>
       </div>
@@ -175,15 +241,9 @@
       <div class="section">
         <h3>📚 Selected Projects</h3>
         <ul>
-          <li><a href="https://github.com/farzalivand/bonevar-app">Bonevar-App</a>:
-            Ecotourism places showcase platform
-          </li>
-          <li><a href="https://github.com/farzalivand/banking-ai">Banking AI</a>:
-            ML-based banking credit scoring model
-          </li>
-          <li><a href="https://github.com/farzalivand/react-image-cropper">Image Crop Tool</a>:
-            React-based crop & compression tool
-          </li>
+          <li><a href="https://github.com/farzalivand/bonevar-app">Bonevar-App</a>: Web app for eco-tourism sites in Iran</li>
+          <li><a href="https://github.com/farzalivand/banking-ai">Banking AI</a>: Machine learning model for credit scoring</li>
+          <li><a href="https://github.com/farzalivand/react-image-cropper">Crop & Compress Tool</a>: React-based image cropper & compressor</li>
         </ul>
       </div>
     </div>
@@ -195,19 +255,24 @@
     const resumeFa = document.getElementById('resume-fa');
     const resumeEn = document.getElementById('resume-en');
 
-    btnFa.onclick = () => {
+    btnFa.addEventListener('click', () => {
+      btnFa.classList.add('active');
+      btnFa.setAttribute('aria-pressed', 'true');
+      btnEn.classList.remove('active');
+      btnEn.setAttribute('aria-pressed', 'false');
       resumeFa.classList.remove('hide');
       resumeEn.classList.add('hide');
-      btnFa.classList.add('active');
-      btnEn.classList.remove('active');
-    };
+    });
 
-    btnEn.onclick = () => {
-      resumeFa.classList.add('hide');
-      resumeEn.classList.remove('hide');
+    btnEn.addEventListener('click', () => {
       btnEn.classList.add('active');
+      btnEn.setAttribute('aria-pressed', 'true');
       btnFa.classList.remove('active');
-    };
+      btnFa.setAttribute('aria-pressed', 'false');
+      resumeEn.classList.remove('hide');
+      resumeFa.classList.add('hide');
+    });
   </script>
+
 </body>
 </html>
